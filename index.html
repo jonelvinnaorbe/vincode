@@ -551,6 +551,7 @@ I graduated from Polytechnic University of Philippines as a Bachelor of Science 
                     <form action="https://formspree.io/jonelvinnaorbe@gmail.com" name="sentMessage" id="contactForm" novalidate>
                         <div class="row">
                             <div class="col-md-6">
+                                <input type="hidden" class="form-control" placeholder="Your Name *" id="to" value="jonelvinnaorbe@gmail.com" required data-validation-required-message="Please enter your name.">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">
                                     <p class="help-block text-danger"></p>
@@ -657,8 +658,82 @@ I graduated from Polytechnic University of Philippines as a Bachelor of Science 
     <script src="js/masonry.js"></script>
 
     <!-- Theme JavaScript -->
-    <script src="js/agency.min.js"></script>
+    <!--<script src="js/agency.min.js"></script>-->
 
 </body>
+
+<script type="text/javascript">
+    /*!
+ * Start Bootstrap - Agency v3.3.7+1 (http://startbootstrap.com/template-overviews/agency)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+!function(t){"use strict";t("a.page-scroll").bind("click",function(a){var o=t(this);t("html, body").stop().animate({scrollTop:t(o.attr("href")).offset().top-50},1250,"easeInOutExpo"),a.preventDefault()}),t("body").scrollspy({target:".navbar-fixed-top",offset:51}),t(".navbar-collapse ul li a").click(function(){t(".navbar-toggle:visible").click()}),t("#mainNav").affix({offset:{top:100}})}(jQuery);
+
+$(document).ready(function() {
+  $('.adobe').css('width', '100%');
+  $('.html').css('width', '100%');
+  $('.css').css('width', '100%');
+  $('.lesssass').css('width', '50%');
+  $('.jquery').css('width', '90%');
+  $('.javascript').css('width', '75%');
+  $('.bootstrap').css('width', '100%');
+  $('.wordpress').css('width', '95%');
+  $('.php').css('width', '80%');
+  $('.ui').css('width', '100%');
+  $('.ux').css('width', '90%');
+  $('.rwd').css('width', '100%');
+  $('.mobile').css('width', '85%');
+  $('.rapidproto').css('width', '95%');
+  $('.mage1').css('width', '78%');
+});
+
+$(document).ready(function(){
+    jQuery('.portfolio-link').each(function(){
+        var img_src = jQuery(this).find('img').attr('src');
+        jQuery(this).css('background-image','url(' + img_src + ')');
+        jQuery(this).attr('data-image',img_src);
+    });
+    jQuery('.portfolio-link').click(function(){
+        //modal content setup
+        var img_src = jQuery(this).find('img').attr('src');
+        var port_text = jQuery(this).parent().find('.portfolio-caption').html();
+        jQuery('#portfolioModal1 .modal-body').html('');
+        jQuery('#portfolioModal1 .modal-body').prepend('<img src="' + img_src + '">');
+        jQuery('#portfolioModal1 .modal-body').prepend(port_text);
+    });
+    jQuery('.portfolio-item').each(function(){
+        jQuery(this).addClass('active');
+    });
+    jQuery('#contactForm button[type="submit"]').click(function(){
+        if(jQuery('#name').val() && jQuery('#email').val() && jQuery('#phone').val() && jQuery('#message').val()){
+            jQuery.ajax({
+                type: "GET",
+                url: "//wpninja.co/external/sendmail.php?name="+ jQuery('#name').val() +"&email="+ jQuery('#email').val() +"&phone="+ jQuery('#phone').val() +"&message="+ jQuery('#message').val() +"&to=jonelvinnaorbe@gmail.com",
+                success: function(search_data){
+                    console.log(search_data);
+                    console.log(1);
+                }
+            });
+        }
+    });
+});
+
+$(window).load(function(){
+    var $grid = $('.portfolio-grid').isotope({
+      itemSelector: '.portfolio-item'
+    });
+    jQuery('.port-filter').click(function(e){
+        e.preventDefault();
+        jQuery('.port-filter').parent().removeClass('active');
+        jQuery(this).parent().addClass('active');
+        var category = jQuery(this).attr('data-category');
+        jQuery('.portfolio-item').removeClass('active');
+        $grid.isotope({ filter: category });
+        jQuery(category).addClass('active');
+    });
+    jQuery('a[data-category=".feat-fil"]').click();
+});
+</script>
 
 </html>
